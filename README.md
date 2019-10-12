@@ -1,71 +1,46 @@
-*Psst — looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
-
----
-
-# svelte app
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+# **Install**
 
 ```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
+npm i @murunwas/cvelte-ui
+```
+or
+```bash
+yarn add @murunwas/cvelte-ui
 ```
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+This package has no dependencies.
 
+# **Usage**
 
-## Get started
+```html
+<script>
+  import { ButtonGroup, Button,Input,Icon,Switch,Select,Tag,Alert } from "./";
 
-Install the dependencies...
+let disabled =true;
+  function onSubmit(params) {
+    console.log("clicked");
+    disabled=!disabled;
+  }
+</script>
 
-```bash
-cd svelte-app
-npm install
-```
+<!-- <Button on:click={onSubmit} circle icon="search">Submit</Button> -->
+<ButtonGroup>
+  <Button  bind:disabled={disabled}>Submit</Button>
+  <Button  type="danger" icon="search">Danget</Button>
+  <Button  type="success">Add</Button>
+</ButtonGroup>
 
-...then start [Rollup](https://rollupjs.org):
+<Button on:click={onSubmit} type="success" circle icon="delete">Block</Button>
 
-```bash
-npm run dev
-```
+<Input bind:disabled={disabled} pass/>
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+<Icon/>
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-
-## Deploying to the web
-
-### With [now](https://zeit.co/now)
-
-Install `now` if you haven't already:
-
-```bash
-npm install -g now
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-now
-```
-
-As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public
+<Switch bind:checked={disabled}  bind:disabled={disabled}/>
+<br/>
+<Select/>
+<br/>
+<Tag effect="light"/>
+<br/>
+<Alert effect="dark"/>
 ```

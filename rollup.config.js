@@ -3,17 +3,36 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import pkg from "./package.json";
 
 const production = !process.env.ROLLUP_WATCH;
 
-export default {
-	input: 'src/main.js',
-	output: {
+
+const input= !production?'src/main.js':"src/index.js";
+
+const output= !production? {
+	sourcemap: true,
+	format: 'iife',
+	name: 'app',
+	file: 'public/bundle.js'
+}:[
+	{
+		file: pkg.module,
+		format: "es",
 		sourcemap: true,
-		format: 'iife',
-		name: 'app',
-		file: 'public/bundle.js'
+		name
 	},
+	{
+		file: pkg.main,
+		format: "umd",
+		sourcemap: true,
+		name
+	}
+];
+
+export default {
+	input,
+	output,
 	plugins: [
 		svelte({
 			// enable run-time checks when not in production
